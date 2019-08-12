@@ -1,13 +1,13 @@
 package com.hcl.fundtransfer.exception;
 
-public class UserNotFoundException extends RuntimeException {
+public class CommonException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public UserNotFoundException(String message) {
+	public CommonException(String message) {
 		super(message);
 	}
 	

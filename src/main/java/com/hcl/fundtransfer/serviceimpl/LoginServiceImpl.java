@@ -3,8 +3,7 @@ package com.hcl.fundtransfer.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.fundtransfer.dto.CustomerLoginDto;
-import com.hcl.fundtransfer.dto.LoginDto;
+import com.hcl.fundtransfer.DTO.CustomerLoginDto;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.exception.UserNotFoundException;
 import com.hcl.fundtransfer.repository.IAccountRepository;

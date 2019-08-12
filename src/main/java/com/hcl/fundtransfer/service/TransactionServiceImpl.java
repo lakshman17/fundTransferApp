@@ -1,18 +1,27 @@
 package com.hcl.fundtransfer.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.hcl.fundtransfer.DTO.ApplicationResponse;
+import com.hcl.fundtransfer.DTO.FundtransferDto;
+import com.hcl.fundtransfer.DTO.TransactionDto;
 import com.hcl.fundtransfer.constants.FundtransferConstants;
-import com.hcl.fundtransfer.dto.ApplicationResponse;
-import com.hcl.fundtransfer.dto.FundtransferDto;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Transaction;
+import com.hcl.fundtransfer.entity.TransactionType;
 import com.hcl.fundtransfer.exception.AccountNumberException;
+import com.hcl.fundtransfer.exception.CommonException;
+import com.hcl.fundtransfer.exception.InSufficientFundsException;
 import com.hcl.fundtransfer.repository.IAccountRepository;
 import com.hcl.fundtransfer.repository.ICustomerRepository;
 import com.hcl.fundtransfer.repository.TransactionRepository;
@@ -41,10 +50,12 @@ public class TransactionServiceImpl implements TransactionService {
 			throw new AccountNumberException(FundtransferConstants.ERROR_FROM_ACCOUNT_NUMBER_MESSAGE);
 		if (!toAccount.isPresent())
 			throw new AccountNumberException(FundtransferConstants.ERROR_TO_ACCOUNT_NUMBER_MESSAGE);
+		if (fundTransferDto.getFromAccountNumber() .equals( fundTransferDto.getToAccountNumber()))
+			throw new AccountNumberException(FundtransferConstants.ERROR_TO_FROM_ACCOUNT);
 		if (fundTransferDto.getAmount() <= 0)
-			throw new AccountNumberException(FundtransferConstants.ERROR_AMOUNT_GREATERTHAN);
+			throw new CommonException(FundtransferConstants.ERROR_AMOUNT_GREATERTHAN);
 		if (fromAccount.get().getBalance() < fundTransferDto.getAmount())
-			throw new AccountNumberException(FundtransferConstants.ERROR_TO_INUFFICIENT_BALANCE);
+			throw new InSufficientFundsException(FundtransferConstants.ERROR_TO_INUFFICIENT_BALANCE);
 
 		// Debit Transaction
 		Transaction debitTransaction = new Transaction();
@@ -52,11 +63,11 @@ public class TransactionServiceImpl implements TransactionService {
 		debitTransaction.setToAccountNo(fundTransferDto.getToAccountNumber());
 		debitTransaction.setAmount(fundTransferDto.getAmount());
 		double debitAmount = fromAccount.get().getBalance() - fundTransferDto.getAmount();
-		debitTransaction.setTransactionType("debit");
+		debitTransaction.setTransactionType(TransactionType.DEBIT.toString());
 		debitTransaction.setAccount(fromAccount.get());
 		debitTransaction.setCustomer(fromAccount.get().getCustomer());
 		debitTransaction.setComment(fundTransferDto.getComment());
-		
+
 		// Account saving
 		fromAccount.get().setBalance(debitAmount);
 		accountRepository.save(fromAccount.get());
@@ -69,7 +80,7 @@ public class TransactionServiceImpl implements TransactionService {
 		creditTransaction.setToAccountNo(fundTransferDto.getToAccountNumber());
 		creditTransaction.setAmount(fundTransferDto.getAmount());
 		double creditAmount = toAccount.get().getBalance() + fundTransferDto.getAmount();
-		creditTransaction.setTransactionType("credit");
+		creditTransaction.setTransactionType(TransactionType.CREDIT.toString());
 		creditTransaction.setAccount(toAccount.get());
 		creditTransaction.setCustomer(toAccount.get().getCustomer());
 		creditTransaction.setComment(fundTransferDto.getComment());
@@ -78,8 +89,25 @@ public class TransactionServiceImpl implements TransactionService {
 		accountRepository.save(toAccount.get());
 		creditTransaction.setClosingBalance(toAccount.get().getBalance());
 		transactionRepository.save(creditTransaction);
-		
+
 		return new ApplicationResponse(FundtransferConstants.TRANSFERED_SUCCESS);
+	}
+
+	@Override
+	public List<TransactionDto> getTransacions(Long accountNumber) {
+
+		Optional<Account> fromAccount = accountRepository.findByAccountNumber(accountNumber);
+		if (!fromAccount.isPresent())
+			throw new AccountNumberException(FundtransferConstants.ERROR_ACCOUNT_NUMBER_MESSAGE);
+		Pageable pageable = PageRequest.of(0, 10);		
+		List<Transaction> transactionsList = transactionRepository.findByFromAccountNo(accountNumber,pageable);
+		List<TransactionDto> transactionDtoList = new ArrayList<>();
+		transactionsList.stream().forEach(p -> {
+			TransactionDto transactionDto = new TransactionDto();
+			BeanUtils.copyProperties(p, transactionDto);
+			transactionDtoList.add(transactionDto);
+		});
+		return transactionDtoList;
 	}
 
 }

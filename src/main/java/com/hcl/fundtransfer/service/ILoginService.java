@@ -2,8 +2,7 @@ package com.hcl.fundtransfer.service;
 
 import org.springframework.stereotype.Service;
 
-import com.hcl.fundtransfer.dto.CustomerLoginDto;
-import com.hcl.fundtransfer.dto.LoginDto;
+import com.hcl.fundtransfer.DTO.CustomerLoginDto;
 
 @Service
 public interface ILoginService {

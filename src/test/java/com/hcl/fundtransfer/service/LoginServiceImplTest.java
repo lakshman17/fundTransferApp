@@ -1,8 +1,6 @@
 package com.hcl.fundtransfer.service;
 
-import static org.assertj.core.api.Assertions.fail;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.hcl.fundtransfer.dto.CustomerLoginDto;
-import com.hcl.fundtransfer.dto.LoginDto;
+import com.hcl.fundtransfer.DTO.CustomerLoginDto;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.exception.UserNotFoundException;
 import com.hcl.fundtransfer.repository.ICustomerRepository;

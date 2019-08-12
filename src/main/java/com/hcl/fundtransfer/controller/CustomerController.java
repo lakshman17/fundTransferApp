@@ -1,7 +1,6 @@
 package com.hcl.fundtransfer.controller;
 
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.fundtransfer.dto.CustomerDTO;
-import com.hcl.fundtransfer.dto.CustomerResponseDTO;
+import com.hcl.fundtransfer.DTO.CustomerDTO;
+import com.hcl.fundtransfer.DTO.CustomerResponseDTO;
 import com.hcl.fundtransfer.service.CustomerService;
 
 @RestController

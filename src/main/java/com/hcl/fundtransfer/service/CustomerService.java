@@ -1,7 +1,7 @@
 package com.hcl.fundtransfer.service;
 
-import com.hcl.fundtransfer.dto.CustomerDTO;
-import com.hcl.fundtransfer.dto.CustomerResponseDTO;
+import com.hcl.fundtransfer.DTO.CustomerDTO;
+import com.hcl.fundtransfer.DTO.CustomerResponseDTO;
 
 public interface CustomerService {
 

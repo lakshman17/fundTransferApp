@@ -1,4 +1,4 @@
-package com.hcl.fundtransfer.dto;
+package com.hcl.fundtransfer.DTO;
 
 import java.io.Serializable;
 
