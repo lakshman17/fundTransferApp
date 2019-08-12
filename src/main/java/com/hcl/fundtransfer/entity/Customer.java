@@ -31,4 +31,5 @@ public class Customer implements Serializable{
 	private String lastName;
 	private String password;
 	private Long mobileNumber;
+//	private Long accountNumber;
 }

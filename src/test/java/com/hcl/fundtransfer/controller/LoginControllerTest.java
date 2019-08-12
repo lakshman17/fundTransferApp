@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,19 +44,16 @@ private MockMvc mockMvc;
 	public void loginCustomer() throws Exception
 	{
 		loginDto = new CustomerLoginDto();
-		Mockito.when(iLoginService.loginCustomer(loginDto)).thenReturn("login successfull");
-		mockMvc.perform(MockMvcRequestBuilders.put("/login").contentType(MediaType.APPLICATION_JSON).
-				accept(MediaType.ALL).content(asJsonString(customer)));
-		
-//		loginDTO = new LoginDTO();
-//		 customerDTO = new CustomerDTO();
-		 
-//		loginDto.setAccountNumber(456789L);
-//		loginDto.setPassword("12345");
 //		Mockito.when(iLoginService.loginCustomer(loginDto)).thenReturn("login successfull");
-//		mockMvc.perform(MockMvcRequestBuilders.put("/api/login")
-//				.contentType(MediaType.APPLICATION_JSON).content(asJsonString(customerDTO)))
-//				.andExpect(MockMvcResultMatchers.status().isOk());
+//		mockMvc.perform(MockMvcRequestBuilders.put("/login").contentType(MediaType.APPLICATION_JSON).
+//				accept(MediaType.ALL).content(asJsonString(customer)));
+		 
+		loginDto.setAccountNumber(456789L);
+		loginDto.setPassword("12345");
+		Mockito.when(iLoginService.loginCustomer(Mockito.any())).thenReturn("login successfull");
+		mockMvc.perform(MockMvcRequestBuilders.put("/login")
+				.contentType(MediaType.APPLICATION_JSON).content(asJsonString(loginDto)))
+				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	public static String asJsonString(final Object obj) {

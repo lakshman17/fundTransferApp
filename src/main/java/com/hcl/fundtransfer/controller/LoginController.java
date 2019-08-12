@@ -29,6 +29,6 @@ public class LoginController {
 	{
 		logger.info("in login customer method");
 		String response = loginServiceImpl.loginCustomer(loginDTO);
-		return new ResponseEntity<String>(response, HttpStatus.CREATED);
+		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 }
