@@ -26,9 +26,10 @@ public class Customer implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long customerId;
+	private Long accountNumber;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private Long mobileNumber;
-	private Long accountNumber;
+//	private Long accountNumber;
 }

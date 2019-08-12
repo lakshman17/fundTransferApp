@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.hcl.fundtransfer.entity.Customer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer,Long> {
-
+public interface ICustomerRepository extends JpaRepository<Customer, Long> {
+	
+	public Customer findByAccountNumberAndPassword(Long accountNumber, String password);
 }

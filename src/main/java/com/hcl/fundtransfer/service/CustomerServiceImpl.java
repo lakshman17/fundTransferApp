@@ -12,17 +12,17 @@ import com.hcl.fundtransfer.dto.CustomerDTO;
 import com.hcl.fundtransfer.dto.CustomerResponseDTO;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Customer;
-import com.hcl.fundtransfer.repository.AccountRepository;
-import com.hcl.fundtransfer.repository.CustomerRepository;
+import com.hcl.fundtransfer.repository.IAccountRepository;
+import com.hcl.fundtransfer.repository.ICustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
 	@Autowired
-	CustomerRepository customerRepository;
+	ICustomerRepository customerRepository;
 	@Autowired
-	AccountRepository accountRepository;
+	IAccountRepository accountRepository;
 
 	@Override
 	public CustomerResponseDTO createCustomer(CustomerDTO customerDTO) {

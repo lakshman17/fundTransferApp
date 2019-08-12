@@ -14,8 +14,8 @@ import com.hcl.fundtransfer.dto.FundtransferDto;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.entity.Transaction;
-import com.hcl.fundtransfer.repository.AccountRepository;
-import com.hcl.fundtransfer.repository.CustomerRepository;
+import com.hcl.fundtransfer.repository.IAccountRepository;
+import com.hcl.fundtransfer.repository.ICustomerRepository;
 import com.hcl.fundtransfer.repository.TransactionRepository;
 import com.hcl.fundtransfer.service.TransactionServiceImpl;
 
@@ -25,41 +25,56 @@ public class TransactionServiceImplTest {
 	TransactionRepository transacionRepository;
 
 	@Mock
-	AccountRepository accountRepository;
+	IAccountRepository accountRepository;
 
 	@Mock
-	CustomerRepository cusomerRepository;
+	ICustomerRepository cusomerRepository;
 
 	@InjectMocks
 	TransactionServiceImpl transactionServiceImpl;
 	Customer customer1;
 	Customer customer2;
-	Account account1;
-	Account account2;
+	Account fromAccount;
+	Account toAccount;
 	FundtransferDto fundTransferDto;
 
 	@Before
 	public void setUp() {
 		customer1 = getCustomer1();
 		customer2 = getCustomer2();
-		account1 = getAccount1();
-		account2 = getAccount2();
-		fundTransferDto=getFundTransferDto();
+		fromAccount = getAccount1();
+		toAccount = getAccount2();
+		fundTransferDto = getFundTransferDto();
 	}
 
 	@Test
 	public void fundTranserTest() {
-		
-		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getFromAccountNumber())).thenReturn(Optional.of(account1));
-		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getToAccountNumber())).thenReturn(Optional.of(account2));
-		
-	//	Transaction transaction=new Te
+
+		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getFromAccountNumber()))
+				.thenReturn(Optional.of(fromAccount));
+		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getToAccountNumber()))
+				.thenReturn(Optional.of(toAccount));
+
+		Transaction debitTransaction = new Transaction();
+		debitTransaction.setFromAccountNo(fundTransferDto.getFromAccountNumber());
+		debitTransaction.setToAccountNo(fundTransferDto.getToAccountNumber());
+		debitTransaction.setAmount(fundTransferDto.getAmount());
+		double debitAmount = fromAccount.getBalance() - fundTransferDto.getAmount();
+		debitTransaction.setTransactionType("debit");
+		debitTransaction.setAccount(fromAccount);
+		debitTransaction.setCustomer(fromAccount.getCustomer());
+		debitTransaction.setComment(fundTransferDto.getComment());
+
+		// Account saving
+		fromAccount.setBalance(debitAmount);
+//		Mockito.when(accountRepository.save(fromAccount)).thenReturn(Optional.of(fromAccount));
+//		debitTransaction.setClosingBalance(fromAccount.get().getBalance());
+//		transactionRepository.save(debitTransaction);
 
 	}
 
-	public FundtransferDto getFundTransferDto()
-	{
-		FundtransferDto fundTransferDto=new FundtransferDto();
+	public FundtransferDto getFundTransferDto() {
+		FundtransferDto fundTransferDto = new FundtransferDto();
 		fundTransferDto.setAmount(10000.0);
 		fundTransferDto.setToAccountNumber(1234L);
 		fundTransferDto.setToAccountNumber(5678L);
@@ -83,7 +98,6 @@ public class TransactionServiceImplTest {
 		account.setCustomer(getCustomer1());
 		return account;
 
-		
 	}
 
 	public Account getAccount2() {

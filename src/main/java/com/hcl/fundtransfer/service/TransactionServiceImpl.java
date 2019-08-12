@@ -13,8 +13,8 @@ import com.hcl.fundtransfer.dto.FundtransferDto;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Transaction;
 import com.hcl.fundtransfer.exception.AccountNumberException;
-import com.hcl.fundtransfer.repository.AccountRepository;
-import com.hcl.fundtransfer.repository.CustomerRepository;
+import com.hcl.fundtransfer.repository.IAccountRepository;
+import com.hcl.fundtransfer.repository.ICustomerRepository;
 import com.hcl.fundtransfer.repository.TransactionRepository;
 
 @Service
@@ -22,10 +22,10 @@ public class TransactionServiceImpl implements TransactionService {
 	public static final Logger LOGGER = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
 	@Autowired
-	CustomerRepository customerRepository;
+	ICustomerRepository customerRepository;
 
 	@Autowired
-	AccountRepository accountRepository;
+	IAccountRepository accountRepository;
 
 	@Autowired
 	TransactionRepository transactionRepository;

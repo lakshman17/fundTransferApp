@@ -14,8 +14,8 @@ import com.hcl.fundtransfer.dto.CustomerDTO;
 import com.hcl.fundtransfer.dto.CustomerResponseDTO;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Customer;
-import com.hcl.fundtransfer.repository.AccountRepository;
-import com.hcl.fundtransfer.repository.CustomerRepository;
+import com.hcl.fundtransfer.repository.IAccountRepository;
+import com.hcl.fundtransfer.repository.ICustomerRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CustomerServiceImplTest {
@@ -23,9 +23,9 @@ public class CustomerServiceImplTest {
 	@InjectMocks
 	CustomerServiceImpl customerServiceImpl;
 	@Mock
-	CustomerRepository customerRepository;
+	ICustomerRepository customerRepository;
 	@Mock
-	AccountRepository accountRepository;
+	IAccountRepository accountRepository;
 
 	CustomerResponseDTO customerResponseDTO;
 	CustomerDTO customerDTO;

@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.fundtransfer.entity.Account;
 
-
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long> {
+public interface IAccountRepository extends JpaRepository<Account, Long> {
 	Optional<Account> findByAccountNumber(Long accountNumber);
 }
