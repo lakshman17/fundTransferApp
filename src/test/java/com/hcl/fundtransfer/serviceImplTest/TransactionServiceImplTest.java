@@ -32,11 +32,17 @@ public class TransactionServiceImplTest {
 
 	@InjectMocks
 	TransactionServiceImpl transactionServiceImpl;
+	
+	
 	Customer customer1;
 	Customer customer2;
 	Account fromAccount;
 	Account toAccount;
 	FundtransferDto fundTransferDto;
+	Transaction debitTransaction;
+	Transaction creditTransaction;
+	double debitAmount;
+	double creditAmount;
 
 	@Before
 	public void setUp() {
@@ -54,22 +60,19 @@ public class TransactionServiceImplTest {
 				.thenReturn(Optional.of(fromAccount));
 		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getToAccountNumber()))
 				.thenReturn(Optional.of(toAccount));
-
-		Transaction debitTransaction = new Transaction();
-		debitTransaction.setFromAccountNo(fundTransferDto.getFromAccountNumber());
-		debitTransaction.setToAccountNo(fundTransferDto.getToAccountNumber());
-		debitTransaction.setAmount(fundTransferDto.getAmount());
-		double debitAmount = fromAccount.getBalance() - fundTransferDto.getAmount();
-		debitTransaction.setTransactionType("debit");
-		debitTransaction.setAccount(fromAccount);
-		debitTransaction.setCustomer(fromAccount.getCustomer());
-		debitTransaction.setComment(fundTransferDto.getComment());
-
-		// Account saving
-		fromAccount.setBalance(debitAmount);
-//		Mockito.when(accountRepository.save(fromAccount)).thenReturn(Optional.of(fromAccount));
-//		debitTransaction.setClosingBalance(fromAccount.get().getBalance());
-//		transactionRepository.save(debitTransaction);
+		
+//		debitTransaction = getTransaction1();
+//		fromAccount.setBalance(debitAmount);
+//		Mockito.when(accountRepository.save(Mockito.any())).thenReturn(Optional.of(fromAccount));
+//		debitTransaction.setClosingBalance(fromAccount.getBalance());
+//		Mockito.when(transacionRepository.save(Mockito.any())).thenReturn(Optional.of(fromAccount));
+//		
+//		
+//		creditTransaction = getTransaction2();
+//		toAccount.setBalance(creditAmount);
+//	//	Mockito.when(accountRepository.save(Mockito.any())).thenReturn(Optional.of(toAccount));
+//		creditTransaction.setClosingBalance(toAccount.getBalance());
+//		//Mockito.when(transacionRepository.save(Mockito.any())).thenReturn(Optional.of(toAccount));
 
 	}
 
@@ -82,12 +85,30 @@ public class TransactionServiceImplTest {
 	}
 
 	public Transaction getTransaction1() {
-		Transaction transaction = new Transaction();
-		transaction.setTransactionId(1L);
-		transaction.setFromAccountNo(1234L);
-		transaction.setToAccountNo(5678L);
-		transaction.setTransactionType("debit");
-		return transaction;
+
+		Transaction debitTransaction = new Transaction();
+		debitTransaction.setFromAccountNo(fundTransferDto.getFromAccountNumber());
+		debitTransaction.setToAccountNo(fundTransferDto.getToAccountNumber());
+		debitTransaction.setAmount(fundTransferDto.getAmount());
+		debitAmount = fromAccount.getBalance() - fundTransferDto.getAmount();
+		debitTransaction.setTransactionType("debit");
+		debitTransaction.setAccount(fromAccount);
+		debitTransaction.setCustomer(fromAccount.getCustomer());
+		debitTransaction.setComment(fundTransferDto.getComment());
+		return debitTransaction;
+	}
+
+	public Transaction getTransaction2() {
+		Transaction creditTransaction = new Transaction();
+		creditTransaction.setFromAccountNo(fundTransferDto.getFromAccountNumber());
+		creditTransaction.setToAccountNo(fundTransferDto.getToAccountNumber());
+		creditTransaction.setAmount(fundTransferDto.getAmount());
+		 creditAmount = toAccount.getBalance() + fundTransferDto.getAmount();
+		creditTransaction.setTransactionType("credit");
+		creditTransaction.setAccount(toAccount);
+		creditTransaction.setCustomer(toAccount.getCustomer());
+		creditTransaction.setComment(fundTransferDto.getComment());
+		return creditTransaction;
 	}
 
 	public Account getAccount1() {
