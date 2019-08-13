@@ -13,7 +13,6 @@ import com.hcl.fundtransfer.dto.CustomerLoginDto;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.exception.UserNotFoundException;
 import com.hcl.fundtransfer.repository.ICustomerRepository;
-import com.hcl.fundtransfer.serviceimpl.LoginServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginServiceImplTest {

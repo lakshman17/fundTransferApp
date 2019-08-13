@@ -1,4 +1,4 @@
-package com.hcl.fundtransfer.serviceimpl;
+package com.hcl.fundtransfer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
