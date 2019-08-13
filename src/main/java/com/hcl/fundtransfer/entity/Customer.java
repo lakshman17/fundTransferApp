@@ -8,14 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table
-@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
@@ -31,5 +29,4 @@ public class Customer implements Serializable{
 	private String lastName;
 	private String password;
 	private Long mobileNumber;
-//	private Long accountNumber;
 }

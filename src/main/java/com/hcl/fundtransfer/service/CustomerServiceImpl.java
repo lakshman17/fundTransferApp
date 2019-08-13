@@ -23,7 +23,15 @@ public class CustomerServiceImpl implements CustomerService {
 	ICustomerRepository customerRepository;
 	@Autowired
 	IAccountRepository accountRepository;
-
+	/**
+	 * @author Deepika S
+	 * This method is used for customer registration 
+	 * @param customerDTO it is the request object 
+	 * which contains firstName,lastName,phoneNumber and password
+	 * @return it returns accountNumber and message("Registration successful")
+	 * 
+	 */
+	
 	@Override
 	public CustomerResponseDTO createCustomer(CustomerDTO customerDTO) {
 
@@ -44,15 +52,14 @@ public class CustomerServiceImpl implements CustomerService {
 		LOGGER.info("account saved");
 
 		CustomerResponseDTO customerResponseDTO = new CustomerResponseDTO();
-		customerResponseDTO.setAccountNumber(accountNumber());
-		customerResponseDTO.setMessage("Registration Successfull");
+		customerResponseDTO.setAccountNumber(accno);
+		customerResponseDTO.setMessage("Registration Successful");
 		LOGGER.info("Account number generated");
 		return customerResponseDTO;
 	}
 
 	private Long accountNumber() {
-		Long number = ThreadLocalRandom.current().nextLong(10000000, 90000000);
-		return number;
+		 return ThreadLocalRandom.current().nextLong(10000000, 90000000);
 	}
 
 }

@@ -13,14 +13,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table
-@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter

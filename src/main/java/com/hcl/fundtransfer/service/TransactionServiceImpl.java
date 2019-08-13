@@ -39,6 +39,16 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	TransactionRepository transactionRepository;
 
+	/**
+	 * @author HariPriya G
+	 * This method explains
+	 * transfer the amount fromAccount to toAccount number
+	 * @param fundTransferDto it is the request object 
+	 * which contains fromAccountNumber,toAccountNumber,amount and remarks
+	 * @return it returns "transfered success" message
+	 * 
+	 */
+
 	@Override
 	public ApplicationResponse doFundTransfer(FundtransferDto fundTransferDto) {
 		LOGGER.info("fundtransfer service impl");
@@ -50,7 +60,7 @@ public class TransactionServiceImpl implements TransactionService {
 			throw new AccountNumberException(FundtransferConstants.ERROR_FROM_ACCOUNT_NUMBER_MESSAGE);
 		if (!toAccount.isPresent())
 			throw new AccountNumberException(FundtransferConstants.ERROR_TO_ACCOUNT_NUMBER_MESSAGE);
-		if (fundTransferDto.getFromAccountNumber() .equals( fundTransferDto.getToAccountNumber()))
+		if (fundTransferDto.getFromAccountNumber().equals(fundTransferDto.getToAccountNumber()))
 			throw new AccountNumberException(FundtransferConstants.ERROR_TO_FROM_ACCOUNT);
 		if (fundTransferDto.getAmount() <= 0)
 			throw new CommonException(FundtransferConstants.ERROR_AMOUNT_GREATERTHAN);
@@ -92,6 +102,15 @@ public class TransactionServiceImpl implements TransactionService {
 
 		return new ApplicationResponse(FundtransferConstants.TRANSFERED_SUCCESS);
 	}
+	
+	/**
+	 * @author Attish Raj
+	 * This method will show the list of transactions based on accountNumber	 * 
+	 * @param accountNumber it is the request object 
+	 * which contains already logined person accountNumber
+	 * @return it returns list of transactions
+	 * 
+	 */
 
 	@Override
 	public List<TransactionDto> getTransacions(Long accountNumber) {
@@ -99,8 +118,8 @@ public class TransactionServiceImpl implements TransactionService {
 		Optional<Account> fromAccount = accountRepository.findByAccountNumber(accountNumber);
 		if (!fromAccount.isPresent())
 			throw new AccountNumberException(FundtransferConstants.ERROR_ACCOUNT_NUMBER_MESSAGE);
-		Pageable pageable = PageRequest.of(0, 10);		
-		List<Transaction> transactionsList = transactionRepository.findByFromAccountNo(accountNumber,pageable);
+		Pageable pageable = PageRequest.of(0, 10);
+		List<Transaction> transactionsList = transactionRepository.findByFromAccountNo(accountNumber, pageable);
 		List<TransactionDto> transactionDtoList = new ArrayList<>();
 		transactionsList.stream().forEach(p -> {
 			TransactionDto transactionDto = new TransactionDto();

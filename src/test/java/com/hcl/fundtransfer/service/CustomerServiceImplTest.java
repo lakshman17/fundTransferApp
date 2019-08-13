@@ -42,7 +42,7 @@ public class CustomerServiceImplTest {
 		customer.setFirstName("deepi");
 		
 		customerResponseDTO=new CustomerResponseDTO();
-		customerResponseDTO.setMessage("Registration Successfull");
+		customerResponseDTO.setMessage("Registration Successful");
 	
 		account = new Account();
 		account.setAccountId(1L);
@@ -53,7 +53,7 @@ public class CustomerServiceImplTest {
 		Mockito.when(customerRepository.save(Mockito.any())).thenReturn(customer);
 		Mockito.when(accountRepository.save(Mockito.any())).thenReturn(account);
 		customerResponseDTO= customerServiceImpl.createCustomer(customerDTO);
-		assertEquals("Registration Successfull", customerResponseDTO.getMessage());
+		assertEquals("Registration Successful", customerResponseDTO.getMessage());
 		
 	}
 	

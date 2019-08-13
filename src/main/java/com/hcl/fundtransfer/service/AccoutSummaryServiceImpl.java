@@ -17,6 +17,14 @@ public class AccoutSummaryServiceImpl implements AccountSummaryService {
 	@Autowired
 	IAccountRepository iAccountRepository;
 
+	/**
+	 * @author Gurpreet Singh
+	 * This method will show the account summary of accountNumber	 * 
+	 * @param accountNumber it is the request object 
+	 * which contains already logined person accountNumber
+	 * @return it returns the account summary
+	 * 
+	 */
 	@Override
 	public AccountSummaryReponse getAccountSummary(Long accountNumber) {
 		Optional<Account> account = iAccountRepository.findByAccountNumber(accountNumber);
