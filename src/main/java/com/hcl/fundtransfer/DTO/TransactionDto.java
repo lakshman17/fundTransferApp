@@ -1,4 +1,4 @@
-package com.hcl.fundtransfer.DTO;
+package com.hcl.fundtransfer.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;

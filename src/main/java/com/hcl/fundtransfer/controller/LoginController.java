@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.fundtransfer.DTO.CustomerLoginDto;
+import com.hcl.fundtransfer.dto.CustomerLoginDto;
 import com.hcl.fundtransfer.serviceimpl.LoginServiceImpl;
 
 @RestController

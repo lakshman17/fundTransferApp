@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.hcl.fundtransfer.DTO.ErrorResponse;
+import com.hcl.fundtransfer.dto.ErrorResponse;
 
 @ControllerAdvice
 public class GlobalExceptionHandlerT {

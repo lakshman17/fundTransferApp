@@ -10,8 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.hcl.fundtransfer.DTO.CustomerDTO;
-import com.hcl.fundtransfer.DTO.CustomerResponseDTO;
+import com.hcl.fundtransfer.dto.CustomerDTO;
+import com.hcl.fundtransfer.dto.CustomerResponseDTO;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.repository.IAccountRepository;

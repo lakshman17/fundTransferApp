@@ -15,9 +15,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hcl.fundtransfer.DTO.ApplicationResponse;
-import com.hcl.fundtransfer.DTO.FundtransferDto;
 import com.hcl.fundtransfer.constants.FundtransferConstants;
+import com.hcl.fundtransfer.dto.ApplicationResponse;
+import com.hcl.fundtransfer.dto.FundtransferDto;
 import com.hcl.fundtransfer.service.TransactionService;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.fundtransfer.DTO.AccountSummaryReponse;
 import com.hcl.fundtransfer.constants.FundtransferConstants;
+import com.hcl.fundtransfer.dto.AccountSummaryReponse;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.exception.AccountNumberException;
 import com.hcl.fundtransfer.repository.IAccountRepository;

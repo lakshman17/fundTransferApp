@@ -8,8 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.fundtransfer.DTO.CustomerDTO;
-import com.hcl.fundtransfer.DTO.CustomerResponseDTO;
+import com.hcl.fundtransfer.dto.CustomerDTO;
+import com.hcl.fundtransfer.dto.CustomerResponseDTO;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.repository.IAccountRepository;

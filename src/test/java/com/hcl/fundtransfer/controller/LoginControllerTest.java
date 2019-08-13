@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hcl.fundtransfer.DTO.CustomerLoginDto;
+import com.hcl.fundtransfer.dto.CustomerLoginDto;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.service.ILoginService;
 

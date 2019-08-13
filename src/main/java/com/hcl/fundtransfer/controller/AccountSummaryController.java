@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hcl.fundtransfer.DTO.AccountSummaryReponse;
+import com.hcl.fundtransfer.dto.AccountSummaryReponse;
 import com.hcl.fundtransfer.service.AccountSummaryService;
 import com.hcl.fundtransfer.service.TransactionServiceImpl;
 

@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.hcl.fundtransfer.DTO.CustomerLoginDto;
+import com.hcl.fundtransfer.dto.CustomerLoginDto;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.exception.UserNotFoundException;
 import com.hcl.fundtransfer.repository.ICustomerRepository;

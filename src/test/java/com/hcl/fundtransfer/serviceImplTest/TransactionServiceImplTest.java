@@ -13,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.hcl.fundtransfer.DTO.ApplicationResponse;
-import com.hcl.fundtransfer.DTO.FundtransferDto;
-import com.hcl.fundtransfer.DTO.TransactionDto;
 import com.hcl.fundtransfer.constants.FundtransferConstants;
+import com.hcl.fundtransfer.dto.ApplicationResponse;
+import com.hcl.fundtransfer.dto.FundtransferDto;
+import com.hcl.fundtransfer.dto.TransactionDto;
 import com.hcl.fundtransfer.entity.Account;
 import com.hcl.fundtransfer.entity.Customer;
 import com.hcl.fundtransfer.entity.Transaction;
