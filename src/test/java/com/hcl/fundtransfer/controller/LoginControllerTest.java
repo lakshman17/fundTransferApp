@@ -2,7 +2,6 @@ package com.hcl.fundtransfer.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,8 +25,6 @@ public class LoginControllerTest {
 	@MockBean
 	ILoginService iLoginService;
 
-//	Customer customer;
-//	CustomerLoginDto loginDto;
 
 	@Test
 	public void testLoginCustomer() throws Exception {
@@ -35,7 +32,6 @@ public class LoginControllerTest {
 		CustomerLoginDto loginDTO = new CustomerLoginDto();
 		loginDTO.setAccountNumber(345667L);
 		loginDTO.setPassword("sample");
-		Mockito.when(iLoginService.loginCustomer(loginDTO)).thenReturn("login successfull");
 		mockMvc.perform(MockMvcRequestBuilders.put("/api/login").contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(loginDTO))).andExpect(MockMvcResultMatchers.status().isOk());
 

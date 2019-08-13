@@ -54,7 +54,7 @@ public class LoginServiceImplTest {
 		Customer customer = getCustomer();
 		CustomerLoginDto loginDto = getCustomerLoginDto();
 		Mockito.when(iCustomerRepository.findByAccountNumberAndPassword(loginDto.getAccountNumber(),loginDto.getPassword())).thenReturn(customer);
-		assertEquals("login successfull", loginServiceImpl.loginCustomer(loginDto));
+		assertEquals("login successfull", loginServiceImpl.loginCustomer(loginDto).getMessage());
 	}
 	
 	@Test(expected = UserNotFoundException.class)

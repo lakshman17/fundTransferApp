@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.dto.CustomerLoginDto;
+import com.hcl.fundtransfer.dto.LoginResponseDto;
 import com.hcl.fundtransfer.service.ILoginService;
 
 @RestController
@@ -25,10 +26,10 @@ public class LoginController {
 	ILoginService iLoginService;
 		
 	@PutMapping("/login")
-	public ResponseEntity<String> loginCustomer(@RequestBody CustomerLoginDto loginDTO) 
+	public ResponseEntity<LoginResponseDto> loginCustomer(@RequestBody CustomerLoginDto loginDTO) 
 	{
 		logger.info("in login customer method");
-		String response = iLoginService.loginCustomer(loginDTO);
+		LoginResponseDto response = iLoginService.loginCustomer(loginDTO);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }

@@ -9,5 +9,6 @@ import com.hcl.fundtransfer.entity.Account;
 
 @Repository
 public interface IAccountRepository extends JpaRepository<Account, Long> {
+	
 	Optional<Account> findByAccountNumber(Long accountNumber);
 }
