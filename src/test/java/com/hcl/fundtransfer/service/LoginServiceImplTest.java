@@ -65,13 +65,8 @@ public class LoginServiceImplTest {
 	public void testLoginCustomerNegative()
 	{
 		CustomerLoginDto loginDto;
-		Customer customer = getCustomer();
 		loginDto = getCustomerLoginDto();
-//		try {
-			Mockito.when(iCustomerRepository.findByAccountNumberAndPassword(null, null)).thenReturn(customer);
-//			fail("Customer not found", iCustomerRepository.findByAccountNumberAndPassword(null, null));
-//		} catch (Exception e) {
-			assertEquals(new UserNotFoundException("Customer not found"), loginServiceImpl.loginCustomer(loginDto));
-//		}
+			Mockito.when(iCustomerRepository.findByAccountNumberAndPassword(Mockito.anyLong(), Mockito.anyString())).thenReturn(null);
+			loginServiceImpl.loginCustomer(loginDto);
 	}
 }
