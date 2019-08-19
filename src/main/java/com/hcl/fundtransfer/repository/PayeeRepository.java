@@ -11,5 +11,7 @@ import com.hcl.fundtransfer.entity.Payee;
 public interface PayeeRepository extends JpaRepository<Payee, Integer> {
 
 	Optional<Payee> findByPayeeAccountNumberAndStatus(String payeeAccountNumber, String string);
+	
+	Optional<Payee> findByPayeeAccountNumber(String accountNumber);
 
 }

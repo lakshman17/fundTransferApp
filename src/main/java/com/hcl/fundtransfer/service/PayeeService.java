@@ -6,5 +6,7 @@ import com.hcl.fundtransfer.dto.PayeeResponseDto;
 public interface PayeeService {
 
 	PayeeResponseDto createPayee(PayeeRequestDto request);
+	
+	
 
 }

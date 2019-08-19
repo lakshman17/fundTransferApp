@@ -2,8 +2,6 @@ package com.hcl.fundtransfer.dto;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +16,5 @@ public class PayeeRequestDto implements Serializable {
 	private String payeeAccountNumber;
 	private String ifscCode;
 	private String branchName;
-	@JsonIgnore
 	private Integer customerId;
 }

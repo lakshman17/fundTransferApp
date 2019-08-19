@@ -33,7 +33,10 @@ public class Otp implements Serializable {
 	private Long otpNumber;
 	@CreationTimestamp
 	private LocalDate creationDate;
+	
 	@OneToOne
 	private Customer customer;
+	@OneToOne
+	private Payee payee;
 
 }
