@@ -17,5 +17,6 @@ public class ConfirmPayeeRequestDto implements Serializable{/**
 	private Long otpNumber;
 	private Integer customerId;
 	private Integer payeeId;
+	private String status;
 
 }

@@ -16,5 +16,6 @@ public class PayeeRequestDto implements Serializable {
 	private String payeeAccountNumber;
 	private String ifscCode;
 	private String branchName;
+	private Integer payeeId;
 	private Integer customerId;
 }

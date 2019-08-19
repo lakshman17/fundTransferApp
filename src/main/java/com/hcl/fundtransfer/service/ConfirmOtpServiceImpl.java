@@ -35,6 +35,7 @@ public class ConfirmOtpServiceImpl implements ConfirmOtpService {
 	@Override
 	public ApplicationResponse confirmPayee(ConfirmPayeeRequestDto confirmPayeeRequestDto) {
 
+		String status = null;
 		Optional<Payee> payee = payeeRepository.findById(confirmPayeeRequestDto.getPayeeId());
 		Optional<Customer> customer = iCustomerRepository.findById(confirmPayeeRequestDto.getCustomerId());
 		Optional<Otp> optDb = otpRepository.getPayeeOtpNumber(confirmPayeeRequestDto.getPayeeId());
@@ -46,11 +47,24 @@ public class ConfirmOtpServiceImpl implements ConfirmOtpService {
 			throw new CustomerNotFoundException("payee not found");
 		if (!confirmPayeeRequestDto.getOtpNumber().equals(optDb.get().getOtpNumber()))
 			throw new CommonException("Please enter valid otp");
-		
-		payee.get().setStatus("Payee addedd");
+
+		if (confirmPayeeRequestDto.getStatus().equalsIgnoreCase("add")) {
+
+			payee.get().setStatus("Payee addedd");
+			status = "Payee added successfully";
+		} else if (confirmPayeeRequestDto.getStatus().equalsIgnoreCase("update")) {
+
+			payee.get().setStatus("Payee updated");
+			status = "Payee updated successfully";
+		} else {
+//			customer.get().setCustomerId(0);
+//			payee.get().setCustomer(customer.get());
+			payee.get().setStatus("Payee deleted");
+			status = "Payee deleted successfully";
+		}
 		payeeRepository.save(payee.get());
 
-		return new ApplicationResponse("Payee added successfully");
+		return new ApplicationResponse(status);
 
 	}
 
