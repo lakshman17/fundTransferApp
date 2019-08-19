@@ -14,11 +14,10 @@ import com.hcl.fundtransfer.entity.Payee;
 public interface PayeeRepository extends JpaRepository<Payee, Integer> {
 
 	Optional<Payee> findByPayeeAccountNumberAndStatus(String payeeAccountNumber, String string);
-	
+
 	@Query("select p from Payee p where p.customer.customerId=:customerId")
 	List<Payee> findAllById(@Param("customerId") Integer customerId);
-	
-	
-	
+
+	Optional<Payee> findByPayeeAccountNumber(String accountNumber);
 
 }

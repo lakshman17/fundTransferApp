@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Account implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,8 +28,13 @@ public class Account implements Serializable {
 	private String accountNumber;
 	private Double balance;
 	@OneToOne
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name = "customer_id")
 	private Customer customer;
+
+	@OneToOne
+	@JoinColumn(name = "payee_id")
+	private Payee payeeId;
+
 //	@OneToMany(mappedBy="account")
 //	private List<Transaction> transaction;
 }

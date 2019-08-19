@@ -24,6 +24,7 @@ import com.hcl.fundtransfer.exception.CommonException;
 import com.hcl.fundtransfer.exception.InSufficientFundsException;
 import com.hcl.fundtransfer.repository.IAccountRepository;
 import com.hcl.fundtransfer.repository.ICustomerRepository;
+import com.hcl.fundtransfer.repository.PayeeRepository;
 import com.hcl.fundtransfer.repository.TransactionRepository;
 
 @Service
@@ -39,12 +40,14 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	TransactionRepository transactionRepository;
 
+	@Autowired
+	PayeeRepository payeeRepository;
+
 	/**
-	 * @author HariPriya G
-	 * This method explains
-	 * transfer the amount fromAccount to toAccount number
-	 * @param fundTransferDto it is the request object 
-	 * which contains fromAccountNumber,toAccountNumber,amount and remarks
+	 * @author HariPriya G This method explains transfer the amount fromAccount to
+	 *         toAccount number
+	 * @param fundTransferDto it is the request object which contains
+	 *                        fromAccountNumber,toAccountNumber,amount and remarks
 	 * @return it returns "transfered success" message
 	 * 
 	 */
@@ -102,12 +105,12 @@ public class TransactionServiceImpl implements TransactionService {
 
 		return new ApplicationResponse(FundtransferConstants.TRANSFERED_SUCCESS);
 	}
-	
+
 	/**
-	 * @author Attish Raj
-	 * This method will show the list of transactions based on accountNumber	 * 
-	 * @param accountNumber it is the request object 
-	 * which contains already logined person accountNumber
+	 * @author Attish Raj This method will show the list of transactions based on
+	 *         accountNumber *
+	 * @param accountNumber it is the request object which contains already logined
+	 *                      person accountNumber
 	 * @return it returns list of transactions
 	 * 
 	 */
