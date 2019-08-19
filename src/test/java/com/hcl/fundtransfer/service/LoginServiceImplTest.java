@@ -26,7 +26,7 @@ public class LoginServiceImplTest {
 	public Customer getCustomer()
 	{
 		Customer customer = new Customer();
-		customer.setCustomerId(1L);
+		customer.setCustomerId(1);
 		customer.setFirstName("Gurpreet");
 		customer.setLastName("Singh");
 		customer.setMobileNumber(9876655876L);
@@ -44,7 +44,7 @@ public class LoginServiceImplTest {
 	public CustomerLoginDto getCustomerLoginDto()
 	{
 		CustomerLoginDto customer = new CustomerLoginDto();
-		customer.setAccountNumber(123456L);
+		customer.setAccountNumber("123456L");
 		customer.setPassword("12345");
 		return customer;
 	}
@@ -62,7 +62,7 @@ public class LoginServiceImplTest {
 	{
 		CustomerLoginDto loginDto;
 		loginDto = getCustomerLoginDto();
-			Mockito.when(iCustomerRepository.findByAccountNumberAndPassword(Mockito.anyLong(), Mockito.anyString())).thenReturn(null);
+			Mockito.when(iCustomerRepository.findByAccountNumberAndPassword(Mockito.anyString(), Mockito.anyString())).thenReturn(null);
 			loginServiceImpl.loginCustomer(loginDto);
 	}
 }

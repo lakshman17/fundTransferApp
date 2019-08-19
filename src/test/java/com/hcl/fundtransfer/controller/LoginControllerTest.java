@@ -30,7 +30,7 @@ public class LoginControllerTest {
 	public void testLoginCustomer() throws Exception {
 
 		CustomerLoginDto loginDTO = new CustomerLoginDto();
-		loginDTO.setAccountNumber(345667L);
+		loginDTO.setAccountNumber("345667");
 		loginDTO.setPassword("sample");
 		mockMvc.perform(MockMvcRequestBuilders.put("/api/login").contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonString(loginDTO))).andExpect(MockMvcResultMatchers.status().isOk());

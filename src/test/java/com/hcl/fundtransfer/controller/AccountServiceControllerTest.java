@@ -61,8 +61,8 @@ public class AccountServiceControllerTest {
 	public FundtransferDto getFundTransferDto() {
 		FundtransferDto fundTransferDto = new FundtransferDto();
 		fundTransferDto.setAmount(10000.0);
-		fundTransferDto.setFromAccountNumber(5678L);
-		fundTransferDto.setToAccountNumber(1234L);
+		fundTransferDto.setFromAccountNumber("5678");
+		fundTransferDto.setToAccountNumber("1234");
 		
 		return fundTransferDto;
 	}

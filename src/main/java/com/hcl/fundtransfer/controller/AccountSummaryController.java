@@ -24,7 +24,7 @@ public class AccountSummaryController {
 	AccountSummaryService accuntSummaryService;
 
 	@GetMapping("/viewAccountSummary/{accountNumber}")
-	public ResponseEntity<AccountSummaryReponse> getAccountSummary(@PathVariable Long accountNumber) {
+	public ResponseEntity<AccountSummaryReponse> getAccountSummary(@PathVariable String accountNumber) {
 		LOGGER.info("AccountSummary controller controller");
 		return new ResponseEntity<>(accuntSummaryService.getAccountSummary(accountNumber), HttpStatus.OK);
 	}

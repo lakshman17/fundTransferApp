@@ -27,9 +27,9 @@ public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long transactionId;
-	private Long fromAccountNo;
-	private Long toAccountNo;
+	private Integer transactionId;
+	private String fromAccountNo;
+	private String toAccountNo;
 	private Double amount;
 	@CreationTimestamp
 	private LocalDate creationDate;

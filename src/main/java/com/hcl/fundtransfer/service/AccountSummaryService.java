@@ -4,6 +4,6 @@ import com.hcl.fundtransfer.dto.AccountSummaryReponse;
 
 public interface AccountSummaryService {
 	
-	AccountSummaryReponse getAccountSummary(Long accountNumber);
+	AccountSummaryReponse getAccountSummary(String accountNumber);
 
 }

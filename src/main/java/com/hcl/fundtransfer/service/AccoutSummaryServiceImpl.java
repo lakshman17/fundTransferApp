@@ -26,7 +26,7 @@ public class AccoutSummaryServiceImpl implements AccountSummaryService {
 	 * 
 	 */
 	@Override
-	public AccountSummaryReponse getAccountSummary(Long accountNumber) {
+	public AccountSummaryReponse getAccountSummary(String accountNumber) {
 		Optional<Account> account = iAccountRepository.findByAccountNumber(accountNumber);
 		if (!account.isPresent())
 			throw new AccountNumberException(FundtransferConstants.ERROR_ACCOUNT_NUMBER_MESSAGE);

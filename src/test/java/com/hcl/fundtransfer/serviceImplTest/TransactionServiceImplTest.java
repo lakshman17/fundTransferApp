@@ -91,7 +91,7 @@ public class TransactionServiceImplTest {
 	@Test(expected = AccountNumberException.class)
 	public void fundTransferFromAccountNumberTest() {
 
-		fundTransferDto.setFromAccountNumber(1L);
+		fundTransferDto.setFromAccountNumber("1L");
 		transactionServiceImpl.doFundTransfer(fundTransferDto);
 	}
 
@@ -99,7 +99,7 @@ public class TransactionServiceImplTest {
 	public void fundTransferToAccountNumberTest() {
 		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getFromAccountNumber()))
 				.thenReturn(Optional.of(fromAccount));
-		fundTransferDto.setToAccountNumber(1L);
+		fundTransferDto.setToAccountNumber("1L");
 		transactionServiceImpl.doFundTransfer(fundTransferDto);
 	}
 
@@ -125,7 +125,7 @@ public class TransactionServiceImplTest {
 
 	@Test(expected = AccountNumberException.class)
 	public void fundTransferFromAndToAccountNumberTest() {
-		fundTransferDto.setToAccountNumber(1234L);
+		fundTransferDto.setToAccountNumber("1234L");
 		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getFromAccountNumber()))
 				.thenReturn(Optional.of(fromAccount));
 		Mockito.when(accountRepository.findByAccountNumber(fundTransferDto.getToAccountNumber()))
@@ -142,18 +142,18 @@ public class TransactionServiceImplTest {
 
 		List<Transaction> transactionList = new ArrayList<>();
 		transactionList.add(getTransaction1());
-		Mockito.when(accountRepository.findByAccountNumber(1234L))
+		Mockito.when(accountRepository.findByAccountNumber("1234L"))
 		.thenReturn(Optional.of(fromAccount));
-		Mockito.when(transacionRepository.findByFromAccountNo(Mockito.anyLong(), Mockito.any())).thenReturn(transactionList);
-		List<TransactionDto> expectedList = transactionServiceImpl.getTransacions(1234L);
+		Mockito.when(transacionRepository.findByFromAccountNo(Mockito.anyString(), Mockito.any())).thenReturn(transactionList);
+		List<TransactionDto> expectedList = transactionServiceImpl.getTransacions("1234L");
 		Assert.assertEquals(transactionDtoList.size(), expectedList.size());
 
 	}
 	
 	@Test(expected = AccountNumberException.class)
 	public void getTransactionsAccountNumberTest() {
-		fundTransferDto.setToAccountNumber(1L);
-		transactionServiceImpl.getTransacions(1234L);
+		fundTransferDto.setToAccountNumber("1L");
+		transactionServiceImpl.getTransacions("1234L");
 	}
 
 	public Transaction getTransaction1() {
@@ -185,8 +185,8 @@ public class TransactionServiceImplTest {
 
 	public Account getAccount1() {
 		Account account = new Account();
-		account.setAccountId(1L);
-		account.setAccountNumber(1234L);
+		account.setAccountId(1);
+		account.setAccountNumber("1234L");
 		account.setBalance(1000.00);
 		account.setCustomer(getCustomer1());
 		return account;
@@ -195,8 +195,8 @@ public class TransactionServiceImplTest {
 
 	public Account getAccount2() {
 		Account account = new Account();
-		account.setAccountId(2L);
-		account.setAccountNumber(5678L);
+		account.setAccountId(2);
+		account.setAccountNumber("5678L");
 		account.setBalance(100.00);
 		account.setCustomer(getCustomer2());
 		return account;
@@ -204,7 +204,7 @@ public class TransactionServiceImplTest {
 
 	public Customer getCustomer1() {
 		Customer customer = new Customer();
-		customer.setCustomerId(1L);
+		customer.setCustomerId(1);
 		customer.setFirstName("priya");
 		customer.setLastName("kumar");
 		customer.setMobileNumber(123456789L);
@@ -215,7 +215,7 @@ public class TransactionServiceImplTest {
 
 	public Customer getCustomer2() {
 		Customer customer = new Customer();
-		customer.setCustomerId(2L);
+		customer.setCustomerId(2);
 		customer.setFirstName("hari");
 		customer.setLastName("naidu");
 		customer.setMobileNumber(123456789L);
@@ -227,14 +227,14 @@ public class TransactionServiceImplTest {
 	public FundtransferDto getFundTransferDto() {
 		FundtransferDto fundTransferDto = new FundtransferDto();
 		fundTransferDto.setAmount(100.0);
-		fundTransferDto.setFromAccountNumber(1234L);
-		fundTransferDto.setToAccountNumber(5678L);
+		fundTransferDto.setFromAccountNumber("1234L");
+		fundTransferDto.setToAccountNumber("5678L");
 		return fundTransferDto;
 	}
 
 	public TransactionDto getTransactionDto() {
 		TransactionDto transactionDto = new TransactionDto();
-		transactionDto.setTransactionId(1L);
+		transactionDto.setTransactionId(1);
 		transactionDto.setFromAccountNo(fundTransferDto.getFromAccountNumber());
 		transactionDto.setToAccountNo(fundTransferDto.getToAccountNumber());
 		transactionDto.setAmount(fundTransferDto.getAmount());

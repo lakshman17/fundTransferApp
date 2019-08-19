@@ -45,7 +45,7 @@ public class CustomerServiceImplTest {
 		customerResponseDTO.setMessage("Registration Successful");
 	
 		account = new Account();
-		account.setAccountId(1L);
+		account.setAccountId(1);
 	}
 	
 	@Test

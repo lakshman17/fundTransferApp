@@ -14,8 +14,8 @@ public class FundtransferDto implements Serializable {
 	* 
 	*/
 	private static final long serialVersionUID = 1L;
-	private Long fromAccountNumber;
-	private Long toAccountNumber;
+	private String fromAccountNumber;
+	private String toAccountNumber;
 	private Double amount;
 	private String comment;
 

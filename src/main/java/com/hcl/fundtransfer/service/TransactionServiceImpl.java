@@ -113,7 +113,7 @@ public class TransactionServiceImpl implements TransactionService {
 	 */
 
 	@Override
-	public List<TransactionDto> getTransacions(Long accountNumber) {
+	public List<TransactionDto> getTransacions(String accountNumber) {
 
 		Optional<Account> fromAccount = accountRepository.findByAccountNumber(accountNumber);
 		if (!fromAccount.isPresent())

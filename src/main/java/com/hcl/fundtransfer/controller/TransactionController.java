@@ -36,7 +36,7 @@ public class TransactionController {
 	}
 
 	@GetMapping("/viewTransactions/{accountNumber}")
-	public ResponseEntity<List<TransactionDto>> getTransactions(@PathVariable Long accountNumber) {
+	public ResponseEntity<List<TransactionDto>> getTransactions(@PathVariable String accountNumber) {
 		LOGGER.info("view last ten transactions controller");
 		return new ResponseEntity<>(transactionService.getTransacions(accountNumber), HttpStatus.OK);
 	}

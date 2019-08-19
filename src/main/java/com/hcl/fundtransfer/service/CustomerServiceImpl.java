@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer = new Customer();
 		Account account = new Account();
 
-		Long accno = accountNumber();
+		String accno = "ING"+customerDTO.getLastName()+accountNumber();
 
 		customerDTO.setAccountNumber(accno);
 		BeanUtils.copyProperties(customerDTO, customer);

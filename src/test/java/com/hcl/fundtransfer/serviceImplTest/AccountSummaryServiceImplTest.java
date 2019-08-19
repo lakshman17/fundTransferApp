@@ -35,21 +35,21 @@ public class AccountSummaryServiceImplTest {
 
 	@Test
 	public void getAccountSummaryTest() {
-		Mockito.when(iAccountRepository.findByAccountNumber(Mockito.anyLong())).thenReturn(Optional.of(account));
-		AccountSummaryReponse applicationSummaryResponse = accoutSummaryServiceImpl.getAccountSummary(1234L);
+		Mockito.when(iAccountRepository.findByAccountNumber(Mockito.anyString())).thenReturn(Optional.of(account));
+		AccountSummaryReponse applicationSummaryResponse = accoutSummaryServiceImpl.getAccountSummary("1234L");
 		Assert.assertEquals(FundtransferConstants.PLEASE_FIND_ACOCUNT_DETAILS, applicationSummaryResponse.getMessage());
 	}
 	
 	@Test(expected = AccountNumberException.class)
 	public void getAccountSummaryAccountNumberTest() {
-		account.setAccountNumber(1L);
-		accoutSummaryServiceImpl.getAccountSummary(1234L);
+		account.setAccountNumber("1");
+		accoutSummaryServiceImpl.getAccountSummary("1234L");
 	}
 
 	public Account getAccount() {
 		Account account = new Account();
-		account.setAccountId(1L);
-		account.setAccountNumber(1234L);
+		account.setAccountId(1);
+		account.setAccountNumber("1234L");
 		account.setBalance(1000.00);
 		return account;
 	}

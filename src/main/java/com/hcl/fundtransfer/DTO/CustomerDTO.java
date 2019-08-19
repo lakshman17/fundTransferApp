@@ -16,11 +16,12 @@ public class CustomerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
-	private Long customerId;
+	private Integer customerId;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private Long mobileNumber;
 	@JsonIgnore
-	private Long accountNumber;
+	private String accountNumber;
+	private String emailId;
 }

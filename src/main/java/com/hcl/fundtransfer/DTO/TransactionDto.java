@@ -13,9 +13,9 @@ import lombok.Setter;
 public class TransactionDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Long transactionId;
-	private Long fromAccountNo;
-	private Long toAccountNo;
+	private Integer transactionId;
+	private String fromAccountNo;
+	private String toAccountNo;
 	private Double amount;
 	private LocalDate creationDate;
 	private String transactionType;
