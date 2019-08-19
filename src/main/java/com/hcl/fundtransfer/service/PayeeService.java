@@ -7,6 +7,6 @@ public interface PayeeService {
 
 	PayeeResponseDto createPayee(PayeeRequestDto request);
 	
-	
+	String sendEmail();
 
 }

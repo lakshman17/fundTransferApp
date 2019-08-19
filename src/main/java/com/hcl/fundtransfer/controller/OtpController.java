@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.fundtransfer.dto.OtpResponseDto;
 import com.hcl.fundtransfer.service.OtpService;
+import com.hcl.fundtransfer.service.PayeeService;
 import com.hcl.fundtransfer.util.EmailSender;
 
 @RestController
@@ -21,6 +22,9 @@ public class OtpController {
 	public static final Logger LOGGER = LoggerFactory.getLogger(OtpController.class);
 	@Autowired
 	OtpService otpService;
+	
+	@Autowired
+	PayeeService payeeService;
 
 	@Autowired
 	EmailSender emailSender;
@@ -32,9 +36,9 @@ public class OtpController {
 	}
 
 	@GetMapping("/sendotp")
-	public ResponseEntity<String> sendOtp() throws Exception {
+	public ResponseEntity<String> sendOtp()  {
 		LOGGER.info("send otp gmail");
-		return new ResponseEntity<>(emailSender.sendOtp(), HttpStatus.OK);
+		return new ResponseEntity<>(payeeService.sendEmail(), HttpStatus.OK);
 	}
 
 }

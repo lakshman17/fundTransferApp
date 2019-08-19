@@ -35,7 +35,7 @@ public class LoginServiceImpl implements ILoginService {
 				loginDTO.getPassword());
 		LOGGER.info("inside login");
 		if (customer != null) {
-			return new LoginResponseDto("login successfull", customer.getAccountNumber());
+			return new LoginResponseDto("login successfull",customer.getCustomerId(), customer.getAccountNumber());
 		} else {
 			throw new UserNotFoundException("Customer not found");
 		}
