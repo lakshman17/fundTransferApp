@@ -44,4 +44,10 @@ public class GlobalExceptionHandlerT {
 		return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@ExceptionHandler(PayeeException.class)
+	public ResponseEntity<ErrorResponse> payeeException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
 }
