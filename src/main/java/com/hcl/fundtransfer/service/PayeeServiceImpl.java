@@ -1,5 +1,7 @@
 package com.hcl.fundtransfer.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -43,9 +45,26 @@ public class PayeeServiceImpl implements PayeeService {
 	}
 
 	@Override
+	public List<PayeeRequestDto> getAllPayees(Integer customerId) {
+		List<PayeeRequestDto> allPayees = new ArrayList<>();
+		List<Payee> payeeList = payeeRepository.findAllById(customerId);
+		if (payeeList.isEmpty()) {
+			throw new PayeeNotFoundException(customerId);
+		} else {
+			payeeList.stream().forEach(P -> {
+				PayeeRequestDto payeeDetail = new PayeeRequestDto();
+				BeanUtils.copyProperties(P, payeeDetail);
+				allPayees.add(payeeDetail);
+			});
+			return allPayees;
+		}
+
+	}
+
+	@Override
 	public PayeeResponseDto updatePayee(Integer payeeId, PayeeUpdateRequestDto request) {
 		Payee payeeDetail = payeeRepository.findById(payeeId).orElse(null);
-		if (payeeDetail==null) {
+		if (payeeDetail == null) {
 			throw new PayeeNotFoundException(payeeId);
 		} else {
 			BeanUtils.copyProperties(request, payeeDetail);
@@ -61,14 +80,13 @@ public class PayeeServiceImpl implements PayeeService {
 		Optional<Payee> payeeDetail = payeeRepository.findById(payeeId);
 		if (!payeeDetail.isPresent()) {
 			throw new PayeeNotFoundException(payeeId);
-		}
-		else {
+		} else {
 			payeeRepository.deleteById(payeeId);
 			response.setMessage("Payee deleted successfully");
 			response.setPayeeId(payeeId);
 			return response;
 		}
-		
+
 	}
 
 }
