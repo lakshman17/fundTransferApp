@@ -9,15 +9,11 @@ import com.hcl.fundtransfer.dto.PayeeUpdateRequestDto;
 public interface PayeeService {
 
 	PayeeResponseDto createPayee(PayeeRequestDto request);
-	
-	String sendEmail();
 
 	PayeeResponseDto updatePayee(Integer payeeId, PayeeUpdateRequestDto request);
 
-	PayeeResponseDto deletePayee(Integer payeeId,Integer customerId);
+	PayeeResponseDto deletePayee(Integer payeeId, Integer customerId);
 
 	List<PayeeRequestDto> getAllPayees(Integer customerId);
-
-	
 
 }

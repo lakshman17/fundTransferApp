@@ -11,6 +11,7 @@ public class FundtransferConstants {
 	public static final String ERROR_TO_INUFFICIENT_BALANCE = "Insufficient balance";
 	public static final String ERROR_ACCOUNT_NUMBER_MESSAGE = "Aaccount number not exist";
 	public static final String ERROR_TO_FROM_ACCOUNT = "From and to account numbers should not be same";
+	public static final String OTP_SENT="OTP sent successfully";
 
 	// success messages
 	public static final String TRANSFERED_SUCCESS = "Tranfered successfully";

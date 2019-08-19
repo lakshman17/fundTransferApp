@@ -57,8 +57,7 @@ public class ConfirmOtpServiceImpl implements ConfirmOtpService {
 			payee.get().setStatus("Payee updated");
 			status = "Payee updated successfully";
 		} else {
-//			customer.get().setCustomerId(0);
-//			payee.get().setCustomer(customer.get());
+			//payeeRepository.delete(payee.get());
 			payee.get().setStatus("Payee deleted");
 			status = "Payee deleted successfully";
 		}

@@ -22,7 +22,7 @@ public class OtpController {
 	public static final Logger LOGGER = LoggerFactory.getLogger(OtpController.class);
 	@Autowired
 	OtpService otpService;
-	
+
 	@Autowired
 	PayeeService payeeService;
 
@@ -33,12 +33,6 @@ public class OtpController {
 	public ResponseEntity<OtpResponseDto> getAccountSummary() {
 		LOGGER.info("Otp  controller");
 		return new ResponseEntity<>(otpService.getOtp(), HttpStatus.OK);
-	}
-
-	@GetMapping("/sendotp")
-	public ResponseEntity<String> sendOtp()  {
-		LOGGER.info("send otp gmail");
-		return new ResponseEntity<>(payeeService.sendEmail(), HttpStatus.OK);
 	}
 
 }

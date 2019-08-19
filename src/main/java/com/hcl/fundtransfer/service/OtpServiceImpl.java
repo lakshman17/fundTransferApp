@@ -19,26 +19,13 @@ public class OtpServiceImpl implements OtpService {
 	RestTemplate restTemplate;
 
 	Random random = new Random();
-	String numbers = "0123456789";
-	int otpLength = 4;
 
 	@Override
 	public OtpResponseDto getOtp() {
 		LOGGER.info("enter in to otp service impl");
-//		char[] otp = new char[otpLength];
-//
-//		StringBuilder sb=new StringBuilder(); 
-//		
-//		for (int i = 0; i < otpLength; i++) {
-//			otp[i] = numbers.charAt(random.nextInt(numbers.length()));
-//			sb.append(Arrays.toString(otp));
-//		}
-//		
-//		Long otpLong= Long.valueOf(sb.toString());
-	
-		
-		Long otpLong=ThreadLocalRandom.current().nextLong(1000, 9000);
-		
+
+		Long otpLong = ThreadLocalRandom.current().nextLong(1000, 9000);
+
 		return new OtpResponseDto(otpLong);
 	}
 
