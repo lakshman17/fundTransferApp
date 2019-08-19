@@ -9,10 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class PayeeResponseDto implements Serializable {
-	
+public class PayeeUpdateRequestDto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String message;
-	private Integer payeeId;
+	private String payeeName;
+	private String ifscCode;
+	private String branchName;
 
 }
