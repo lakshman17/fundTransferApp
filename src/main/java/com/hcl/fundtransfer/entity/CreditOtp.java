@@ -33,5 +33,6 @@ public class CreditOtp implements Serializable {
 	@CreationTimestamp
 	private LocalDate creationDate;
 	private Integer cardId;
+//	private Integer customerId;
 
 }

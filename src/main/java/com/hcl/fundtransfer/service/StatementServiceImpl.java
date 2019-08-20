@@ -40,7 +40,7 @@ public class StatementServiceImpl implements StatementService {
 				}
 
 			});
-
+			LOGGER.info("Monthly statements fetched");
 			return purchaseListDto;
 		}
 	}
