@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.hcl.fundtransfer.constants.FundtransferConstants;
 import com.hcl.fundtransfer.dto.ConfirmOtpRequestDto;
 import com.hcl.fundtransfer.dto.ConfirmOtpResponseDto;
 import com.hcl.fundtransfer.entity.CardDetails;
@@ -53,6 +54,8 @@ public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
 			throw new OtpNotFoundException("no otp found");
 		if(!otp.get().getOtpNumber().equals(confirmOtpRequestDto.getOtpNumber()))
 			throw new OtpNotFoundException("please enter valid otp");
+		if (carddetails.get().getCardLimit() < confirmOtpRequestDto.getPrice())
+			throw new InSufficientFundsException(FundtransferConstants.ERROR_TO_INUFFICIENT_BALANCE);
 		
 		Purchase purch= new Purchase();
 		purch.setCardId(confirmOtpRequestDto.getCardId());
