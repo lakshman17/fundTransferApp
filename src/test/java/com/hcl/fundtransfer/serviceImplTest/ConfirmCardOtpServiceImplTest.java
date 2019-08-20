@@ -5,9 +5,11 @@ package com.hcl.fundtransfer.serviceImplTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -48,7 +50,33 @@ public class ConfirmCardOtpServiceImplTest {
 	CreditOtp creditOtp;
 	CardDetails cardDetails;
 	Purchase purchase;
+	double debitamount;
 	
+	public ConfirmOtpRequestDto getConfirmOtpRequestDto()
+	{
+		ConfirmOtpRequestDto confirmOtpRequestDto = new ConfirmOtpRequestDto();
+		confirmOtpRequestDto.setCardId(1);
+		confirmOtpRequestDto.setOtpNumber(1234L);
+		confirmOtpRequestDto.setPrice(100D);
+		return confirmOtpRequestDto;
+	}
+	
+	public ConfirmOtpResponseDto getConfirmOtpResponseDto()
+	{
+		ConfirmOtpResponseDto confirmOtpResponseDto = new ConfirmOtpResponseDto();
+		confirmOtpResponseDto.setMessage("otp verified successfully");
+		return confirmOtpResponseDto;
+	}
+	
+	public CreditOtp getCreditOtp()
+	{
+		CreditOtp creditOtp = new CreditOtp();
+		creditOtp.setCardId(1);
+		creditOtp.setCreationDate(LocalDate.of(2019, 03, 13));
+		creditOtp.setOtpId(1);
+		creditOtp.setOtpNumber(1234L);
+		return creditOtp;
+	}
 	@Before
 	public void setup() {
 		confirmOtpRequestDto = new ConfirmOtpRequestDto();
@@ -65,13 +93,17 @@ public class ConfirmCardOtpServiceImplTest {
 		
 		purchase= new Purchase();
 		purchase.setPrice(2.0D);
+		purchase.setPurchaseId(1);
+		purchase.setTransactionType("Debit");
 	}
 	
+	@Test
 	public void testConfirmOtp()
 	{
 		Mockito.when(creditOtpRepository.findByOtpNumber(confirmOtpRequestDto.getOtpNumber())).thenReturn(Optional.of(creditOtp));
 		Mockito.when(creditCardRepository.findById(confirmOtpRequestDto.getCardId())).thenReturn(Optional.of(cardDetails));
 		Mockito.when(purchaseRepository.save(Mockito.any())).thenReturn(purchase);
+		cardDetails.setCardLimit(debitamount);
 		Mockito.when(creditOtpRepository.save(Mockito.any())).thenReturn(creditOtp);
 		confirmOtpResponseDto = confrimCardOtpService.confirmOtp(confirmOtpRequestDto);
 		assertEquals("Otp verified successfully", confirmOtpResponseDto);
