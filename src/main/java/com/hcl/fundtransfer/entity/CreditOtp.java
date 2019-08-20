@@ -29,7 +29,7 @@ public class CreditOtp implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer otpId;
-	private Integer otpNumber;
+	private Long otpNumber;
 	@CreationTimestamp
 	private LocalDate creationDate;
 	private Integer cardId;

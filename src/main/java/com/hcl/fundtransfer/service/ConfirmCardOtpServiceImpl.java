@@ -15,6 +15,7 @@ import com.hcl.fundtransfer.entity.CardDetails;
 import com.hcl.fundtransfer.entity.CreditOtp;
 import com.hcl.fundtransfer.entity.Purchase;
 import com.hcl.fundtransfer.exception.CardNotFoundException;
+import com.hcl.fundtransfer.exception.InSufficientFundsException;
 import com.hcl.fundtransfer.exception.OtpNotFoundException;
 import com.hcl.fundtransfer.exception.PurchaseNotFoundException;
 import com.hcl.fundtransfer.repository.CreditCardRepository;
@@ -44,17 +45,26 @@ public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
 	public ConfirmOtpResponseDto confirmOtp(ConfirmOtpRequestDto confirmOtpRequestDto) {
 		Optional<CreditOtp> otp = creditOtprepository.findByOtpNumber(confirmOtpRequestDto.getOtpNumber());
 		Optional<CardDetails> carddetails = creditCardrepository.findById(confirmOtpRequestDto.getCardId());
-		Optional<Purchase> purchase = purchaserepository.findByPrice(confirmOtpRequestDto.getPrice());
-		
+		//Optional<Purchase> purchase = purchaserepository.findById(confirmOtpRequestDto.getCardId());
+		//Purchase purch= purchase.get();
 		if(!carddetails.isPresent())
 			throw new CardNotFoundException("card not found");
-		if(!purchase.isPresent())
-			throw new PurchaseNotFoundException("no price found");
 		if(!otp.isPresent())
 			throw new OtpNotFoundException("no otp found");
 		if(!otp.get().getOtpNumber().equals(confirmOtpRequestDto.getOtpNumber()))
 			throw new OtpNotFoundException("please enter valid otp");
 		
+		Purchase purch= new Purchase();
+		purch.setCardId(confirmOtpRequestDto.getCardId());
+		purch.setPrice(confirmOtpRequestDto.getPrice());
+		purch.setStatus("purchased");
+		purch.setTransactionType("Debit");
+		purchaserepository.save(purch);
+		if(carddetails.get().getCardLimit()<=0)
+			throw new InSufficientFundsException("No sufficient balance");
+		double debitamount = carddetails.get().getCardLimit()-confirmOtpRequestDto.getPrice();
+		carddetails.get().setCardLimit(debitamount);
+		purchaserepository.save(purch);
 		creditOtprepository.save(otp.get());
 		
   		return new ConfirmOtpResponseDto("Otp verified successfully");

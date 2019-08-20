@@ -25,7 +25,7 @@ public class ConfirmOtpRequestDto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer otpNumber;
+	private Long otpNumber;
 	private Integer cardId;
 	private double price;
 

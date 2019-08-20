@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +39,7 @@ public class ConfirmCardOtpController {
 	EmailSender emailSender;
 
 	@PostMapping("/comfirmOtp")
-	public ResponseEntity<ConfirmOtpResponseDto> confirmOtp(ConfirmOtpRequestDto confirmOtpRequestDto) {
+	public ResponseEntity<ConfirmOtpResponseDto> confirmOtp(@RequestBody ConfirmOtpRequestDto confirmOtpRequestDto) {
 		LOGGER.info(" credit Otp  controller");
 		ConfirmOtpResponseDto response = confirmCardOtpService.confirmOtp(confirmOtpRequestDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
