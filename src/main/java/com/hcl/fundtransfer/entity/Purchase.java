@@ -33,7 +33,7 @@ public class Purchase implements Serializable {
 	@CreationTimestamp
 	private LocalDate purchaseDate;
 	private String transactionType;
-
+	private Double price;
 	private Integer cardId;
 
 }

@@ -56,5 +56,10 @@ public class GlobalExceptionHandlerT {
 		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
 				HttpStatus.NOT_FOUND);
 	}
-
+	
+	@ExceptionHandler(StatementException.class)
+	public ResponseEntity<ErrorResponse> statementNotFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
 }
