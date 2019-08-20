@@ -1,12 +1,8 @@
 package com.hcl.fundtransfer.service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +18,6 @@ import com.hcl.fundtransfer.dto.CardValidationResponseDto;
 import com.hcl.fundtransfer.dto.OtpResponseDto;
 import com.hcl.fundtransfer.entity.CardDetails;
 import com.hcl.fundtransfer.entity.CreditOtp;
-import com.hcl.fundtransfer.entity.Otp;
 import com.hcl.fundtransfer.exception.CommonException;
 import com.hcl.fundtransfer.repository.CardOtpRepository;
 import com.hcl.fundtransfer.repository.CardValidationRepository;
@@ -57,10 +52,6 @@ public class CardValidationServiceImpl implements CardValidationService {
 		if (!cardDetails.get().getCvv().equals(cardValidationRequestDto.getCvc()))
 			throw new CommonException("Please enter valid cvv");
 
-//		LocalDate dateOfJoiningLocalDate = getLocalDate(cardDetails.get().getValidTo().toString());
-//
-//		if (!dateOfJoiningLocalDate.equals(cardValidationRequestDto.getValidTo()))
-//			throw new CommonException("Please enter valid cvv");
 		
 		OtpResponseDto otpResponse = getOtp();
 		
@@ -75,10 +66,8 @@ public class CardValidationServiceImpl implements CardValidationService {
 
 	public LocalDate getLocalDate(String date) {
 		String DATE_FORMAT="yyyy-MM-dd";
-//		String DATE_FORMAT = "MM-yyyy";
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-		LocalDate toDate = LocalDate.parse(date, dateTimeFormatter);
-		return toDate;
+		return LocalDate.parse(date, dateTimeFormatter);
 
 	}
 	
@@ -87,7 +76,6 @@ public class CardValidationServiceImpl implements CardValidationService {
 		String inputString="1234 1234 1234 1234";
 		String stringWithoutSpaces = inputString.replaceAll("\\s+", "");
         
-        System.out.println("Input String : "+Long.valueOf(stringWithoutSpaces));
 	}
 	
 	

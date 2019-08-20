@@ -124,14 +124,7 @@ public class DateUtil {
 		int hours = (int) (duration % HOURS);
 
 		int days = (int) (duration / HOURS);
-		// int days = (int) (duration / HOURS);
-		// 1d 17h 18m 15s
-		// if (days == 0) {
 		res = String.format("%dd %dh %dm %ds", days, hours, minutes, seconds);
-		// } else {
-		// res = String.format("%dd%02d:%02d:%02d", days, hours, minutes,
-		// seconds);
-		// }
 		return res;
 	}
 

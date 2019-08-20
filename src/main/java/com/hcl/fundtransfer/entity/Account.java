@@ -35,6 +35,4 @@ public class Account implements Serializable {
 	@JoinColumn(name = "payee_id")
 	private Payee payeeId;
 
-//	@OneToMany(mappedBy="account")
-//	private List<Transaction> transaction;
 }

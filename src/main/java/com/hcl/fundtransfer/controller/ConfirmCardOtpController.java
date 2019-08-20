@@ -9,17 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.hcl.fundtransfer.dto.ConfirmOtpRequestDto;
 import com.hcl.fundtransfer.dto.ConfirmOtpResponseDto;
-import com.hcl.fundtransfer.dto.OtpResponseDto;
 import com.hcl.fundtransfer.service.ConfirmCardOtpService;
-import com.hcl.fundtransfer.service.ConfirmOtpService;
 import com.hcl.fundtransfer.util.EmailSender;
 
 /**

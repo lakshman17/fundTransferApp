@@ -5,7 +5,6 @@ import com.hcl.fundtransfer.dto.ConfirmPayeeRequestDto;
 
 public interface ConfirmOtpService {
 
-//	boolean sendOtp();
 
 	ApplicationResponse confirmPayee(ConfirmPayeeRequestDto confirmPayeeRequestDto);
 }

@@ -6,7 +6,6 @@ package com.hcl.fundtransfer.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.hcl.fundtransfer.constants.FundtransferConstants;
@@ -18,13 +17,13 @@ import com.hcl.fundtransfer.entity.Purchase;
 import com.hcl.fundtransfer.exception.CardNotFoundException;
 import com.hcl.fundtransfer.exception.InSufficientFundsException;
 import com.hcl.fundtransfer.exception.OtpNotFoundException;
-import com.hcl.fundtransfer.exception.PurchaseNotFoundException;
 import com.hcl.fundtransfer.repository.CreditCardRepository;
 import com.hcl.fundtransfer.repository.CreditOtpRepository;
 import com.hcl.fundtransfer.repository.PurchaseRepository;
 
 /**
- * @author user1
+ * @author Gurpreet Singh Gohir
+ * This class is used to confirm the otp so that customer can buy the products.
  *
  */
 @Service
@@ -46,8 +45,6 @@ public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
 	public ConfirmOtpResponseDto confirmOtp(ConfirmOtpRequestDto confirmOtpRequestDto) {
 		Optional<CreditOtp> otp = creditOtprepository.findByOtpNumber(confirmOtpRequestDto.getOtpNumber());
 		Optional<CardDetails> carddetails = creditCardrepository.findById(confirmOtpRequestDto.getCardId());
-		//Optional<Purchase> purchase = purchaserepository.findById(confirmOtpRequestDto.getCardId());
-		//Purchase purch= purchase.get();
 		if(!carddetails.isPresent())
 			throw new CardNotFoundException("card not found");
 		if(!otp.isPresent())

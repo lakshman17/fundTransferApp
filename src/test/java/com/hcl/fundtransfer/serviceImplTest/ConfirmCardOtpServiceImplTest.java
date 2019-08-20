@@ -3,6 +3,8 @@
  */
 package com.hcl.fundtransfer.serviceImplTest;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Optional;
 
 import org.junit.Before;
@@ -69,7 +71,10 @@ public class ConfirmCardOtpServiceImplTest {
 	{
 		Mockito.when(creditOtpRepository.findByOtpNumber(confirmOtpRequestDto.getOtpNumber())).thenReturn(Optional.of(creditOtp));
 		Mockito.when(creditCardRepository.findById(confirmOtpRequestDto.getCardId())).thenReturn(Optional.of(cardDetails));
-		Mockito.when(purchaseRepository.findByPrice(confirmOtpRequestDto.getPrice())).thenReturn(Optional.of(purchase));
+		Mockito.when(purchaseRepository.save(Mockito.any())).thenReturn(purchase);
+		Mockito.when(creditOtpRepository.save(Mockito.any())).thenReturn(creditOtp);
+		confirmOtpResponseDto = confrimCardOtpService.confirmOtp(confirmOtpRequestDto);
+		assertEquals("Otp verified successfully", confirmOtpResponseDto);
 	}
 	
 }
