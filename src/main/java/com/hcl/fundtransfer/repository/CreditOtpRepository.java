@@ -17,5 +17,5 @@ import com.hcl.fundtransfer.entity.CreditOtp;
 @Repository
 public interface CreditOtpRepository extends JpaRepository<CreditOtp, Integer> {
 
-	public Optional<CreditOtp> findByOtpNumber(Integer otpNumber);
+	public Optional<CreditOtp> findByOtpNumber(Long otpNumber);
 }
