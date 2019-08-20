@@ -27,10 +27,10 @@ import com.hcl.fundtransfer.util.EmailSender;
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class ConfirmCardOtpController {
 	public static final Logger LOGGER = LoggerFactory.getLogger(ConfirmCardOtpController.class);
-	
+
 	@Autowired
 	ConfirmCardOtpService confirmCardOtpService;
-	
+
 	@Autowired
 	EmailSender emailSender;
 
@@ -40,5 +40,5 @@ public class ConfirmCardOtpController {
 		ConfirmOtpResponseDto response = confirmCardOtpService.confirmOtp(confirmOtpRequestDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	
+
 }

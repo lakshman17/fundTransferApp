@@ -15,5 +15,4 @@ import com.hcl.fundtransfer.entity.CardDetails;
 @Repository
 public interface CreditCardRepository extends JpaRepository<CardDetails, Integer> {
 
-	
 }

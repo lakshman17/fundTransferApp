@@ -2,21 +2,18 @@ package com.hcl.fundtransfer.dto;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @Setter
 @Getter
-public class CardValidationRequestDto implements Serializable{/**
-	 * 
-	 */
+@NoArgsConstructor
+@AllArgsConstructor
+public class StatementRequestDto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private String number;
-	private String expiry;
-	private Integer cvc;
-	private String name;
+	private Integer cardId;
+	private String purchaseDate;
 
 }

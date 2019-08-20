@@ -27,10 +27,10 @@ public class CardValidationServiceImpl implements CardValidationService {
 
 	@Autowired
 	CardValidationRepository cardValidationRepository;
-	
+
 	@Autowired
 	RestTemplate restTemplate;
-	
+
 	@Autowired
 	CardOtpRepository cardOtpRepository;
 
@@ -53,19 +53,23 @@ public class CardValidationServiceImpl implements CardValidationService {
 			throw new CommonException("Please enter valid cvv");
 
 		
+//		String date = convertDate(cardDetails.get().getValidTo().toString(), "yyyy-MM-dd", "MM/yy");
+//
+//		if (!date.equals(cardValidationRequestDto.getExpiry()))
+//			throw new CommonException("Please enter valid thru");
+
 		OtpResponseDto otpResponse = getOtp();
-		
+
 		CreditOtp otp = new CreditOtp();
 		otp.setOtpNumber(otpResponse.getOtpNumber());
 		otp.setCardId(cardDetails.get().getCardId());
 		cardOtpRepository.save(otp);
 
-
 		return new CardValidationResponseDto("Otp sent success", cardDetails.get().getCardId());
 	}
 
 	public LocalDate getLocalDate(String date) {
-		String DATE_FORMAT="yyyy-MM-dd";
+		String DATE_FORMAT = "yyyy-MM-dd";
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 		return LocalDate.parse(date, dateTimeFormatter);
 

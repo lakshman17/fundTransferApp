@@ -28,13 +28,13 @@ import com.hcl.fundtransfer.repository.PurchaseRepository;
  */
 @Service
 public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
-	
+
 	@Autowired
 	CreditOtpRepository creditOtprepository;
-	
+
 	@Autowired
 	CreditCardRepository creditCardrepository;
-	
+
 	@Autowired
 	PurchaseRepository purchaserepository;
 
@@ -45,29 +45,30 @@ public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
 	public ConfirmOtpResponseDto confirmOtp(ConfirmOtpRequestDto confirmOtpRequestDto) {
 		Optional<CreditOtp> otp = creditOtprepository.findByOtpNumber(confirmOtpRequestDto.getOtpNumber());
 		Optional<CardDetails> carddetails = creditCardrepository.findById(confirmOtpRequestDto.getCardId());
-		if(!carddetails.isPresent())
+
+		if (!carddetails.isPresent())
 			throw new CardNotFoundException("card not found");
-		if(!otp.isPresent())
+		if (!otp.isPresent())
 			throw new OtpNotFoundException("no otp found");
-		if(!otp.get().getOtpNumber().equals(confirmOtpRequestDto.getOtpNumber()))
+		if (!otp.get().getOtpNumber().equals(confirmOtpRequestDto.getOtpNumber()))
 			throw new OtpNotFoundException("please enter valid otp");
 		if (carddetails.get().getCardLimit() < confirmOtpRequestDto.getPrice())
 			throw new InSufficientFundsException(FundtransferConstants.ERROR_TO_INUFFICIENT_BALANCE);
-		
-		Purchase purch= new Purchase();
+
+		Purchase purch = new Purchase();
 		purch.setCardId(confirmOtpRequestDto.getCardId());
 		purch.setPrice(confirmOtpRequestDto.getPrice());
 		purch.setStatus("purchased");
 		purch.setTransactionType("Debit");
 		purchaserepository.save(purch);
-		if(carddetails.get().getCardLimit()<=0)
+		if (carddetails.get().getCardLimit() <= 0)
 			throw new InSufficientFundsException("No sufficient balance");
-		double debitamount = carddetails.get().getCardLimit()-confirmOtpRequestDto.getPrice();
+		double debitamount = carddetails.get().getCardLimit() - confirmOtpRequestDto.getPrice();
 		carddetails.get().setCardLimit(debitamount);
 		purchaserepository.save(purch);
 		creditOtprepository.save(otp.get());
-		
-  		return new ConfirmOtpResponseDto("Otp verified successfully");
+
+		return new ConfirmOtpResponseDto("Otp verified successfully");
 	}
 
 }

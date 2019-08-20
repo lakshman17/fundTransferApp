@@ -21,9 +21,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Purchase implements Serializable {
-	/**
-	* 
-	*/
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,7 +31,7 @@ public class Purchase implements Serializable {
 	@CreationTimestamp
 	private LocalDate purchaseDate;
 	private String transactionType;
-	private double price;
+	private Double price;
 	private Integer cardId;
 
 }
