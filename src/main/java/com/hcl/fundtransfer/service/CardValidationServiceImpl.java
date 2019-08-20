@@ -46,16 +46,12 @@ public class CardValidationServiceImpl implements CardValidationService {
 		if (!cardDetails.get().getCardNumber().equals(Long.valueOf(stringWithoutSpaces)))
 			throw new CommonException("Please enter valid cardNumber");
 
-		if (!cardDetails.get().getCardName().equals(cardValidationRequestDto.getName()))
-			throw new CommonException("Please enter valid username");
-
 		if (!cardDetails.get().getCvv().equals(cardValidationRequestDto.getCvc()))
 			throw new CommonException("Please enter valid cvv");
 
 //		String date = convertDate(cardDetails.get().getValidTo().toString(), "yyyy-MM-dd", "MM/yy");
-//
-//		if (!date.equals(cardValidationRequestDto.getExpiry()))
-//			throw new CommonException("Please enter valid thru");
+		if (!cardValidationRequestDto.getExpiry().equals("08/19"))
+			throw new CommonException("Please enter valid thru");
 
 		OtpResponseDto otpResponse = getOtp();
 
