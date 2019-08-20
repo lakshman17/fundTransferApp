@@ -31,7 +31,6 @@ public class StatementServiceImpl implements StatementService {
 
 			purchaseList.stream().forEach(s -> {
 				StatementResponseDto statementResponseDto = new StatementResponseDto();
-
 				String splitString = s.getPurchaseDate().toString().substring(0, 7);
 				if (splitString.equalsIgnoreCase(purchaseDate)) {
 					BeanUtils.copyProperties(s, statementResponseDto);
