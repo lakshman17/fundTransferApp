@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.hcl.fundtransfer.dto.ConfirmOtpRequestDto;
 import com.hcl.fundtransfer.dto.ConfirmOtpResponseDto;
 import com.hcl.fundtransfer.service.ConfirmCardOtpService;

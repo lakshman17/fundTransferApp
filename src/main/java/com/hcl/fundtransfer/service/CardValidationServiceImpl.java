@@ -49,6 +49,7 @@ public class CardValidationServiceImpl implements CardValidationService {
 		if (!cardDetails.get().getCvv().equals(cardValidationRequestDto.getCvc()))
 			throw new CommonException("Please enter valid cvv");
 
+		
 //		String date = convertDate(cardDetails.get().getValidTo().toString(), "yyyy-MM-dd", "MM/yy");
 		if (!cardValidationRequestDto.getExpiry().equals("08/19"))
 			throw new CommonException("Please enter valid thru");
@@ -66,11 +67,21 @@ public class CardValidationServiceImpl implements CardValidationService {
 	public LocalDate getLocalDate(String date) {
 		String DATE_FORMAT = "yyyy-MM-dd";
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-		LocalDate toDate = LocalDate.parse(date, dateTimeFormatter);
-		return toDate;
+		return LocalDate.parse(date, dateTimeFormatter);
 
 	}
-
+	
+	public static void main(String a[]) 
+	{
+		String inputString="1234 1234 1234 1234";
+		String stringWithoutSpaces = inputString.replaceAll("\\s+", "");
+        
+	}
+	
+	
+	
+	
+	
 	private OtpResponseDto getOtp() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

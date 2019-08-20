@@ -22,7 +22,8 @@ import com.hcl.fundtransfer.repository.CreditOtpRepository;
 import com.hcl.fundtransfer.repository.PurchaseRepository;
 
 /**
- * @author user1
+ * @author Gurpreet Singh Gohir
+ * This class is used to confirm the otp so that customer can buy the products.
  *
  */
 @Service

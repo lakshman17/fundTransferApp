@@ -6,6 +6,5 @@ public interface OtpService {
 	
 	OtpResponseDto getOtp();
 	
-	//OtpResponseDto getOtpRestTemplate();
 
 }
