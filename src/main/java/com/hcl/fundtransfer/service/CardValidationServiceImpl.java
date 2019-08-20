@@ -42,12 +42,13 @@ public class CardValidationServiceImpl implements CardValidationService {
 	@Override
 	public CardValidationResponseDto getCardValidationDetails(CardValidationRequestDto cardValidationRequestDto) {
 
+		String stringWithoutSpaces = cardValidationRequestDto.getNumber().replaceAll("\\s+", "");
 		Optional<CardDetails> cardDetails = cardValidationRepository
-				.findByCardNumber(cardValidationRequestDto.getNumber());
+				.findByCardNumber(Long.valueOf(stringWithoutSpaces));
 		if (!cardDetails.isPresent())
 			throw new CommonException("Please enter valid card ");
 
-		if (!cardDetails.get().getCardNumber().equals(cardValidationRequestDto.getNumber()))
+		if (!cardDetails.get().getCardNumber().equals(Long.valueOf(stringWithoutSpaces)))
 			throw new CommonException("Please enter valid cardNumber");
 
 		if (!cardDetails.get().getCardName().equals(cardValidationRequestDto.getName()))
@@ -81,40 +82,17 @@ public class CardValidationServiceImpl implements CardValidationService {
 
 	}
 	
-	public static void main(String a[]) throws ParseException
+	public static void main(String a[]) 
 	{
-		getDate("2019-03-20");
+		String inputString="1234 1234 1234 1234";
+		String stringWithoutSpaces = inputString.replaceAll("\\s+", "");
+        
+        System.out.println("Input String : "+Long.valueOf(stringWithoutSpaces));
 	}
 	
 	
 	
-	private static  void getDate(String dateString) throws ParseException
-	{
-//		SimpleDateFormat sdf=new SimpleDateFormat("MM/yyyy");
-//		SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd");
-//		String val = null;
-//		try {
-//			Calendar date=Calendar.getInstance();
-//			date.set(Calendar.DATE, 1);
-//			date.setTime(sdf1.parse(dateString));
-//			val=sdf.parse(dateString).toString();
-//			//System.out.println(val);
-//			//System.out.println(sdf1.format(date.getTime()));
-//			//System.out.println(sdf.format(date.getTime()));
-//			//System.out.println(val);
-//			//return val;
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		//return val;
-		Date todaysDate = new Date();
-		//LocalDate toDate = LocalDate.parse(dateString, dateTimeFormatter);
-		 DateFormat df = new SimpleDateFormat("MM/yy");
-		 
-		 String testDateString = df.format(todaysDate);
-         System.out.println("String in dd/MM/yyyy format is: " + testDateString);
-	}
+	
 	
 	private OtpResponseDto getOtp() {
 		HttpHeaders headers = new HttpHeaders();
