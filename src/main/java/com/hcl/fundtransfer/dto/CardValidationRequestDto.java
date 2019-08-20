@@ -14,8 +14,8 @@ public class CardValidationRequestDto implements Serializable{/**
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long number;
-	private String expiry;
+	private String number;
+	//private String expiry;
 	private Integer cvc;
 	private String name;
 
