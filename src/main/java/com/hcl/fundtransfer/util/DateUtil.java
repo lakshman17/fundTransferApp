@@ -1,4 +1,5 @@
 package com.hcl.fundtransfer.util;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,11 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class DateUtil {
+	
+	private DateUtil()
+	{
+		
+	}
 
 	public final static long ONE_SECOND = 1000;
 	public final static long SECONDS = 60;

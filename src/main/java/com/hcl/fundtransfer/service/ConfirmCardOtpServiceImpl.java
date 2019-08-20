@@ -6,7 +6,6 @@ package com.hcl.fundtransfer.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.hcl.fundtransfer.dto.ConfirmOtpRequestDto;
@@ -27,13 +26,13 @@ import com.hcl.fundtransfer.repository.PurchaseRepository;
  */
 @Service
 public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
-	
+
 	@Autowired
 	CreditOtpRepository creditOtprepository;
-	
+
 	@Autowired
 	CreditCardRepository creditCardrepository;
-	
+
 	@Autowired
 	PurchaseRepository purchaserepository;
 
@@ -45,19 +44,19 @@ public class ConfirmCardOtpServiceImpl implements ConfirmCardOtpService {
 		Optional<CreditOtp> otp = creditOtprepository.findByOtpNumber(confirmOtpRequestDto.getOtpNumber());
 		Optional<CardDetails> carddetails = creditCardrepository.findById(confirmOtpRequestDto.getCardId());
 		Optional<Purchase> purchase = purchaserepository.findByPrice(confirmOtpRequestDto.getPrice());
-		
-		if(!carddetails.isPresent())
+
+		if (!carddetails.isPresent())
 			throw new CardNotFoundException("card not found");
-		if(!purchase.isPresent())
+		if (!purchase.isPresent())
 			throw new PurchaseNotFoundException("no price found");
-		if(!otp.isPresent())
+		if (!otp.isPresent())
 			throw new OtpNotFoundException("no otp found");
-		if(!otp.get().getOtpNumber().equals(confirmOtpRequestDto.getOtpNumber()))
+		if (!otp.get().getOtpNumber().equals(confirmOtpRequestDto.getOtpNumber()))
 			throw new OtpNotFoundException("please enter valid otp");
-		
+
 		creditOtprepository.save(otp.get());
-		
-  		return new ConfirmOtpResponseDto("Otp verified successfully");
+
+		return new ConfirmOtpResponseDto("Otp verified successfully");
 	}
 
 }
