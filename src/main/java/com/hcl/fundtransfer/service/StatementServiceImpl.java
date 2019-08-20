@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.fundtransfer.dto.StatementRequestDto;
 import com.hcl.fundtransfer.dto.StatementResponseDto;
 import com.hcl.fundtransfer.entity.Purchase;
 import com.hcl.fundtransfer.exception.StatementException;
@@ -22,11 +21,11 @@ public class StatementServiceImpl implements StatementService {
 	PurchaseRepository purchaseRepository;
 
 	@Override
-	public List<StatementResponseDto> getAllStatements(StatementRequestDto statementRequestDto) {
+	public List<StatementResponseDto> getAllStatements(Integer cardId, String purchaseDate) {
 
-		List<Purchase> purchaseList = purchaseRepository.findAllById(statementRequestDto.getCardId());
+		List<Purchase> purchaseList = purchaseRepository.findAllById(cardId);
 		if (purchaseList.isEmpty()) {
-			throw new StatementException(statementRequestDto.getCardId());
+			throw new StatementException(cardId);
 		} else {
 			List<StatementResponseDto> purchaseListDto = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class StatementServiceImpl implements StatementService {
 				StatementResponseDto statementResponseDto = new StatementResponseDto();
 
 				String splitString = s.getPurchaseDate().toString().substring(0, 7);
-				if (splitString.equalsIgnoreCase(statementRequestDto.getPurchaseDate())) {
+				if (splitString.equalsIgnoreCase(purchaseDate)) {
 					BeanUtils.copyProperties(s, statementResponseDto);
 					purchaseListDto.add(statementResponseDto);
 				}
